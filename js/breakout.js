@@ -10,9 +10,19 @@ ball = {
     y: canvas.height/2 ,
     size: 10,
     speed: 4,
-    dx: 4;
-    dy: -4;
+    dx: 4,
+    dy: -4,
 
+}
+
+//create paddle properties
+paddle: {
+    x: canvas.width / 2 - 40,
+    y: canvas.hieght - 20,
+    w: 80,
+    h: 10,
+    speed: 8,
+    dx: 0,
 }
 
 drawball()
@@ -21,7 +31,10 @@ drawball()
 function drawball() {
     ctx.beginPath()
     citx.arc(ball.x,ball.y,ball.size,0, Math.PI * 2,)
-    ctx.stroke()
+    ctx.fillStyle = '#0095DD'
+    ctx.fill()
+    ctix.closepatj
+
 }
 
 rulesBtn.addEventListener('click', () => {
