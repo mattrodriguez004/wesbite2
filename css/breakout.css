@@ -70,6 +70,6 @@ h1 {
 }
 
 .rules.show {
-    transform: TranslateX (0);
+    transform: translateX (0);
 
 }
