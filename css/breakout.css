@@ -67,7 +67,11 @@ h1 {
     padding: 20px;
     line-height: 1.5;
     transform: translateX(-400px);
-    transition: transform  1a ease-in-out;
+    transition: transform  1s ease-in-out (0);
+
 }
 
-
+.rules.show {
+    transform: TranslateX (0); 
+    
+}
