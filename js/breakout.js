@@ -20,7 +20,7 @@ drawball()
 // draw ball on canvas
 function drawball() {
     ctx.beginPath()
-    citx.arc(75,75,50,0, Math.PI * 2, true)
+    citx.arc(ball.x,ball.y,ball.size,0, Math.PI * 2,)
     ctx.stroke()
 }
 
