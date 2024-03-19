@@ -16,7 +16,9 @@ ball = {
 }
 
 // draw ball on canvas
-function drawball()
+function drawball() {
+    ctx.beginPath()
+}
 
 rulesBtn.addEventListener('click', () => {
     rules.classList.add('show')
