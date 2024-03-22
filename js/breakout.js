@@ -1,26 +1,24 @@
 
-rulesBtn = document.getElementById('rules-btn')
-rules = document.getElementById('rules')
-closeBtn = document.getElementById('close-btn')
-ctx = canvas.getContext("2d")
+show = document.getElementById('rules-btn');
+close = document.getElementById('close-btn');
+rules = document.getElementById('rules');
+canvas = document.getElementById('canvas');
+ctx = canvas.getContext('2d');
 
-score = 0
+score = 0;
+BrickRowCount = 9;
+BrickColumnCount = 5;
 
-brickRowCount = 9
-brickColumnCount = 3
-
-//create ball properties
 ball = {
     x: canvas.width / 2,
-    y: canvas.height/2 ,
+    y: canvas.height / 2,
     size: 10,
     speed: 4,
     dx: 4,
     dy: -4,
-
 }
 
-//create paddle properties
+
 paddle = {
     x: canvas.width / 2 - 40,
     y: canvas.height - 20,
@@ -30,136 +28,113 @@ paddle = {
     dx: 0,
 }
 
-//create brick properties
-brickInfo = {
+BrickInfo = {
     w: 70,
     h: 20,
     padding: 10,
     offsetX: 45,
     offsetY: 60,
-    visible: true
+    visible: true,
 }
 
-//Create Bricks
 bricks = []
-for (let i = 0; i < brickRowCount; i++) {
+for (let i = 0; i < BrickRowCount; i++) {
     bricks[i] = []
-    for (let j = 0; j < brickColumnCount; j++) {
-       const x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetx
-        const y = j * (brickInfo.h + brickInfo.padding ) + brickInfo.offsetY
-        bricks[i][j] = {x,y, ...brickInfo}
+    for (let j = 0; j < BrickColumnCount; j++) {
+        const x = i * (BrickInfo.w + BrickInfo.padding) + BrickInfo.offsetX
+        const y = j * (BrickInfo.h + BrickInfo.padding) + BrickInfo.offsetY
+        bricks[i][j] = {
+            x,
+            y,
+            ...BrickInfo,
+        }
     }
 }
 
-
-// draw ball on canvas
-function drawball() {
-    ctx.beginPath()
-    ctx.arc(ball.x,ball.y,ball.size,0, Math.PI * 2,)
-    ctx.fillStyle = '#0095DD'
-    ctx.fill()
-    ctx.closePath()
-
-}
-
-// draw paddle on canvas
 function drawPaddle() {
     ctx.beginPath()
-    ctx.rect(paddle.x,paddle.y,paddle.w,paddle.h)
+    ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h)
     ctx.fillStyle = '#0095DD'
     ctx.fill()
     ctx.closePath()
-
 }
 
-drawball()
-drawPaddle()
+function drawBall() {
+    ctx.beginPath()
+    ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2, true)
+    ctx.fillStyle = '#0095DD'
+    ctx.fill()
+    ctx.closePath()
+    ctx.stroke()
+}
 
-// draw score on canvas
 function drawScore() {
-
-    ctx.fillText(`Score: $(score)`, canvas.width-100, 30)
+    ctx.font = '20px Arial'
+    ctx.fillText(`Score: ${score}`, canvas.width - 100, 30)
 }
 
-// draw bricks on canvas
 function drawBricks() {
     bricks.forEach(column => {
         column.forEach(brick => {
             ctx.beginPath()
             ctx.rect(brick.x, brick.y, brick.w, brick.h)
-            ctx.fillStyle= brick.visible ? '#0095dd' :
-            'transparent';
+            ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent'
             ctx.fill()
             ctx.closePath()
         })
     })
 }
 
-// Create bricks
-
-
-// Draw everything
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height)
-    drawPaddle()
-    drawball()
-    drawScore()
-    drawBricks()
-}
-
-// move paddle on canvas
 function movePaddle() {
-
     paddle.x = paddle.x + paddle.dx
 
-    // wall detection
     if (paddle.x < 0) {
         paddle.x = 0
     }
-    
+
     if (paddle.x + paddle.w > canvas.width) {
         paddle.x = canvas.width - paddle.w
     }
 }
 
-//Keydown Event
+function draw() {
+    ctx.clearRect(0 , 0,canvas.width,canvas.height)
+    drawPaddle()
+    drawBall()
+    drawScore()
+    drawBricks()
+}
+
+function update() {
+    movePaddle()
+    draw()
+    requestAnimationFrame(update)
+}
+
+update ()
+
 function keyDown(e) {
-    if (e.key == 'ArrowRight' || e.key == 'Right') {
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd') {
         paddle.dx = paddle.speed
     }
-    if (e.key == 'ArrowLeft' || e.key == 'Left' ) {
+
+    if (e.key == 'ArrowLeft' || e.key == 'Left' || e.key == 'a') {
         paddle.dx = -paddle.speed
     }
 }
 
-//keyUp event
 function keyUp(e) {
-    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'ArrowLeft' || e.key == 'Left') {
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd' || e.key == 'ArrowLeft' || e.key == 'Left' || e.key == 'a')
         paddle.dx = 0
-    }
-
 }
 
-
-//keyboard event handlers
 document.addEventListener('keydown', keyDown)
 document.addEventListener('keyup', keyUp)
 
-//update canvas drawing and animation
-function update() {
-
-    movePaddle()
-    draw()
-    requestAnimationFrame(update)
-
-}
-
-update()
-
-rulesBtn.addEventListener('click', () => {
-    rules.classList.add('show')
+show.addEventListener('click', () => {
+    rules.classList.toggle('show')
 })
 
-closeBtn.addEventListener('click', () => {
-    rules.classList.remove('show')
+close.addEventListener('click', () => {
+    rules.classList.toggle('show')
 })
