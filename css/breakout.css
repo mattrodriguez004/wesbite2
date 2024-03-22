@@ -31,7 +31,9 @@ h1 {
     cursor: pointer;
     border: 0;
     padding: 10px, 20px;
-    background: #500000
+    background: #000000;
+    color: #ffffff;
+    border-radius: 5px;
 
 
 }
@@ -43,7 +45,7 @@ h1 {
 
 
 .btn:active {
-    transform: scale(0.98)
+    transform: scale(0.98);
 }
 
 
