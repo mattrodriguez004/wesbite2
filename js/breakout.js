@@ -130,7 +130,7 @@ if (ball.x + ball.size < 0) {
 
 //paddle collision
 if (
-    ball.x - ball
+    ball.x - ball.size > 
 )
 
 //update canvas drawing and animation
