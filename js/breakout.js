@@ -151,6 +151,9 @@ bricks.forEach(column => {
 })
 }
 
+function increaseScore () {
+    
+}
 
 update ()
 
