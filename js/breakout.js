@@ -152,8 +152,23 @@ bricks.forEach(column => {
 }
 
 function increaseScore () {
-    
+    score++ // score = score + 1
+
+    if (score == brickCount * brickColumnCount) {
+        score = 0
+        showAllBricks()
+    }
 }
+
+function showAllBricks() {
+    brick.forEach(column => {
+        column.forEach(brick => {
+            
+        })
+    })
+
+}
+
 
 update ()
 
