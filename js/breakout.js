@@ -121,10 +121,8 @@ function moveBall() {
     if (ball.x + ball.size > canvas.width) {
         ball.dx = -1 * ball.dy
     }
-    
-}
 
-// wall collision (left)
+    // wall collision (left)
 if (ball.x + ball.size < 0) {
     ball.dx = -1 * ball.dx
 }
@@ -135,14 +133,20 @@ if (
     ball.x
 )
 
-
-
-//update canvas drawing and animation
-function update() {
-    movePaddle()
-    draw()
-    requestAnimationFrame(update)
+//brick collision
+bricks.forEach(column => {
+    column.forEach(brick => {
+        if (brick.visible){
+            if (
+                ball.y - ball.size < brick.y + brick.h //bottom
+            )
+            ball.dy = -1 * ball.dy
+            brick.visible = false
+        }
+    })
+})
 }
+
 
 update ()
 
