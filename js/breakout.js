@@ -149,6 +149,9 @@ bricks.forEach(column => {
         }
     })
 })
+
+// lose if hit bottom wall
+if (ball.y + ball.size
 }
 
 function increaseScore () {
@@ -163,7 +166,7 @@ function increaseScore () {
 function showAllBricks() {
     brick.forEach(column => {
         column.forEach(brick => {
-            
+
         })
     })
 
