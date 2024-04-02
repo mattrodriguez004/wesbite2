@@ -122,6 +122,9 @@ function moveBall() {
         ball.dx = -1 * ball.dy
     }
 
+    // wall collision (bottom)
+    if (ball.y )
+
     // wall collision (left)
 if (ball.x + ball.size < 0) {
     ball.dx = -1 * ball.dx
@@ -151,7 +154,7 @@ bricks.forEach(column => {
 })
 
 // lose if hit bottom wall
-if (ball.y + ball.size
+if (ball.y + ball.size)
 }
 
 function increaseScore () {
