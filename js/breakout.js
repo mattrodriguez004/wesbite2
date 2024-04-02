@@ -9,6 +9,7 @@ score = 0;
 BrickRowCount = 9;
 BrickColumnCount = 5;
 
+//create ball properties
 ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
@@ -97,6 +98,7 @@ function movePaddle() {
     }
 }
 
+
 function draw() {
     ctx.clearRect(0 , 0,canvas.width,canvas.height)
     drawPaddle()
@@ -105,6 +107,23 @@ function draw() {
     drawBricks()
 }
 
+
+function moveBall() {
+    ball.x = ball.x + ball.dx
+    ball.y = ball.y + ball.dy
+
+    // wall collision (top)
+    if (ball.y + ball.size < 0 ) {
+        ball.dy = -1 + ball.dy
+    }
+
+    //wall collision (right)
+    if (ball.x + ball.size > canvas.width) {
+        ball.dx = -1 * ball.dy
+    }
+}
+
+//update canvas drawing and animation
 function update() {
     movePaddle()
     draw()
