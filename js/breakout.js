@@ -141,9 +141,10 @@ bricks.forEach(column => {
                 ball.x - ball.size > brick.x && //left brickside
                 ball.x + ball.size < brick.x + brick.w && //right
                 ball.y - ball.size < brick.y + brick.h //bottom
-            )
+            ){
             ball.dy = -1 * ball.dy
             brick.visible = false
+            }
         }
     })
 })
