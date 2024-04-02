@@ -130,7 +130,7 @@ if (ball.x + ball.size < 0) {
 //paddle collision
 if (
     ball.x - ball.size > paddle.x &&
-    ball.x 
+    ball.x
 )
 
 //brick collision
@@ -144,6 +144,7 @@ bricks.forEach(column => {
             ){
             ball.dy = -1 * ball.dy
             brick.visible = false
+            increaseScore()
             }
         }
     })
