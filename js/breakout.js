@@ -121,6 +121,7 @@ function moveBall() {
     if (ball.x + ball.size > canvas.width) {
         ball.dx = -1 * ball.dy
     }
+    
 }
 
 // wall collision (left)
@@ -130,8 +131,11 @@ if (ball.x + ball.size < 0) {
 
 //paddle collision
 if (
-    ball.x - ball.size > 
+    ball.x - ball.size > paddle.x &&
+    ball.x
 )
+
+
 
 //update canvas drawing and animation
 function update() {
