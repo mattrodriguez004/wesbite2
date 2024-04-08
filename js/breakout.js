@@ -1,24 +1,24 @@
+show = document.getElementById('rules-btn')
+close = document.getElementById('close-btn')
+rules = document.getElementById('rules')
+canvas = document.getElementById('canvas')
+ctx = canvas.getContext('2d')
+playAgainBtn = document.getElementById('p-a-b');
+quitBtn = document.getElementById('q-b');
+gameoverDiv = document.getElementById('gameover');
 
-show = document.getElementById('rules-btn');
-close = document.getElementById('close-btn');
-rules = document.getElementById('rules');
-canvas = document.getElementById('canvas');
-ctx = canvas.getContext('2d');
+score = 0
+BrickRowCount = 9
+BrickColumnCount = 5
 
-score = 0;
-BrickRowCount = 9;
-BrickColumnCount = 5;
-
-//create ball properties
 ball = {
     x: canvas.width / 2,
-    y: canvas.height / 2,
+    y: canvas.height - 30,
     size: 10,
     speed: 4,
     dx: 4,
-    dy: -4,
+    dy: -4
 }
-
 
 paddle = {
     x: canvas.width / 2 - 40,
@@ -26,7 +26,7 @@ paddle = {
     w: 80,
     h: 10,
     speed: 8,
-    dx: 0,
+    dx: 0
 }
 
 BrickInfo = {
@@ -35,10 +35,23 @@ BrickInfo = {
     padding: 10,
     offsetX: 45,
     offsetY: 60,
-    visible: true,
+    visible: true
 }
 
 bricks = []
+
+function gameover () {
+    score = 0;
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height - 30;
+}
+
+
+function resetGame() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height - 30;
+}
+
 for (let i = 0; i < BrickRowCount; i++) {
     bricks[i] = []
     for (let j = 0; j < BrickColumnCount; j++) {
@@ -47,7 +60,7 @@ for (let i = 0; i < BrickRowCount; i++) {
         bricks[i][j] = {
             x,
             y,
-            ...BrickInfo,
+            ...BrickInfo
         }
     }
 }
@@ -66,7 +79,6 @@ function drawBall() {
     ctx.fillStyle = '#0095DD'
     ctx.fill()
     ctx.closePath()
-    ctx.stroke()
 }
 
 function drawScore() {
@@ -77,17 +89,19 @@ function drawScore() {
 function drawBricks() {
     bricks.forEach(column => {
         column.forEach(brick => {
-            ctx.beginPath()
-            ctx.rect(brick.x, brick.y, brick.w, brick.h)
-            ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent'
-            ctx.fill()
-            ctx.closePath()
+            if (brick.visible) {
+                ctx.beginPath()
+                ctx.rect(brick.x, brick.y, brick.w, brick.h)
+                ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent'
+                ctx.fill()
+                ctx.closePath()
+            }
         })
     })
 }
 
 function movePaddle() {
-    paddle.x = paddle.x + paddle.dx
+    paddle.x += paddle.dx
 
     if (paddle.x < 0) {
         paddle.x = 0
@@ -98,70 +112,51 @@ function movePaddle() {
     }
 }
 
-
-function draw() {
-    ctx.clearRect(0 , 0,canvas.width,canvas.height)
-    drawPaddle()
-    drawBall()
-    drawScore()
-    drawBricks()
-}
-
-
 function moveBall() {
-    ball.x = ball.x + ball.dx
-    ball.y = ball.y + ball.dy
+    ball.x += ball.dx
+    ball.y += ball.dy
 
-    // wall collision (top)
-    if (ball.y + ball.size < 0 ) {
-        ball.dy = -1 + ball.dy
+    if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+        ball.dx *= -1
     }
 
-    //wall collision (right)
-    if (ball.x + ball.size > canvas.width) {
-        ball.dx = -1 * ball.dy
+    if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+        ball.dy *= -1
     }
 
-    // wall collision (bottom)
-    if (ball.y )
+    if (ball.y + ball.size > canvas.height) {
+        gameover();
+    }
 
-    // wall collision (left)
-if (ball.x + ball.size < 0) {
-    ball.dx = -1 * ball.dx
-}
+    if (
+        ball.x - ball.size > paddle.x &&
+        ball.x + ball.size < paddle.x + paddle.w &&
+        ball.y + ball.size > paddle.y
+    ) {
+        ball.dy = -ball.speed
+    }
 
-//paddle collision
-if (
-    ball.x - ball.size > paddle.x &&
-    ball.x
-)
-
-//brick collision
-bricks.forEach(column => {
-    column.forEach(brick => {
-        if (brick.visible){
-            if (
-                ball.x - ball.size > brick.x && //left brickside
-                ball.x + ball.size < brick.x + brick.w && //right
-                ball.y + ball.size > brick.y && /top
-                ball.y - ball.size < brick.y + brick.h //bottom
-            ){
-            ball.dy = -1 * ball.dy
-            brick.visible = false
-            increaseScore()
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            if (brick.visible) {
+                if (
+                    ball.x - ball.size > brick.x &&
+                    ball.x + ball.size < brick.x + brick.w &&
+                    ball.y - ball.size < brick.y + brick.h &&
+                    ball.y + ball.size > brick.y
+                ) {
+                    ball.dy *= -1
+                    brick.visible = false
+                    increaseScore()
+                }
             }
-        }
+        })
     })
-})
-
-// lose if hit bottom wall
-if (ball.y + ball.size)
 }
 
-function increaseScore () {
-    score++ // score = score + 1
-
-    if (score == brickCount * brickColumnCount) {
+function increaseScore() {
+    score++
+    if (score == BrickRowCount * BrickColumnCount) {
         score = 0
         showAllBricks()
     }
@@ -170,14 +165,27 @@ function increaseScore () {
 function showAllBricks() {
     bricks.forEach(column => {
         column.forEach(brick => {
-
+            brick.visible = true
         })
     })
-
 }
 
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawPaddle()
+    drawBall()
+    drawScore()
+    drawBricks()
+}
 
-update ()
+function update() {
+    moveBall()
+    movePaddle()
+    draw()
+    requestAnimationFrame(update)
+}
+
+update()
 
 function keyDown(e) {
     if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd') {
@@ -203,4 +211,15 @@ show.addEventListener('click', () => {
 
 close.addEventListener('click', () => {
     rules.classList.toggle('show')
+
+    playAgainBtn.addEventListener('click', () => {
+        gameoverDiv.classList.remove('show');
+        score = 0;
+        ball.x = canvas.width / 2;
+        ball.y = canvas.height - 30;
+    });
+
+    quitBtn.addEventListener('click', () => {
+        gameoverDiv.classList.remove('show');
+    });
 })
