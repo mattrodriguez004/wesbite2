@@ -26,6 +26,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: margin 0.5 ease-in;
 }
 
 .btn {
@@ -106,6 +107,7 @@ h1 {
 
 
 .message {
+    opacity: 0;
     line-height: 1.7;
     width: 100%;
     background-color: rgba(0,0,0,0.5);
@@ -122,6 +124,7 @@ h1 {
 
 
 .message.visible {
+    opacity: 1;
     transform: translate(-50%, 150%)
 }
 
