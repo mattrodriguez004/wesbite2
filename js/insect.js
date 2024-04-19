@@ -76,7 +76,19 @@ function increaseScore() {
         message.classList.add('visible')
     }
     scoreEl.innerHTML = `Score: ${score}`
-    WL()
+
+    if (score > 59 && seconds < 31)
+    {
+        W.classList.add('visible')
+        message.classList.remove('visible')
+        W = true
+    }
+
+    if (seconds > 30 && score < 60)
+    {
+        L.classList.add('visible')
+        message.classList.remove('visible')
+    }
 }
 
 function getRandomLocation() {
@@ -85,16 +97,4 @@ function getRandomLocation() {
     const x = Math.random() * (width - 200) + 100
     const y = Math.random() * (height - 200) + 100
     return {x,y}
-}
-
-function WL() {
-    if (score > 59 && seconds < 31)
-    {
-        W.classList.add('visible')
-    }
-
-    if (seconds > 30 && score < 61)
-    {
-        L.classList.add('visible')
-    }
 }

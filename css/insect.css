@@ -26,7 +26,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: margin 0.5 ease-in;
+    transition: margin .5s ease-in;
 }
 
 .btn {
@@ -109,7 +109,7 @@ h1 {
 .message {
     opacity: 0;
     line-height: 1.7;
-    width: 100%;
+    width: 110%;
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
     padding: 20px;
@@ -119,9 +119,6 @@ h1 {
     left: 50%;
     transform: translate(-50%, -150%);
 }
-
-
-
 
 .message.visible {
     opacity: 1;
@@ -141,6 +138,27 @@ h1 {
     transition: transform 0.3s ease-in-out;
 }
 
+.insect img {
+    width: 100px;
+    height: 100px;
+}
+
 .insect.caught {
-    transform: translate (-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+}
+
+#W {
+    opacity: 0;
+}
+
+#L {
+    opacity: 0;
+}
+
+#W.visible {
+    opacity: 1;
+}
+
+#L.visible {
+    opacity: 1;
 }
