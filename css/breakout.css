@@ -1,53 +1,36 @@
-*{
-    box-sizing: border-box;
-}
-
 body {
-    background-color: #0095dd;
+    background-color: #0095DD;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    font-family: Arial, Helvetica, sams-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-
-canvas {
-    background: #f0f0f0;
-    display: block;
-    border-radius: 5px;
-}
-
 
 h1 {
     font-size: 45px;
-    color: #ffffff;
+    color: white;
 }
-
 
 .btn {
     cursor: pointer;
     border: 0;
-    padding: 10px, 20px;
-    background: #000000;
-    color: #ffffff;
+    padding: 10px 20px;
+    background: black;
+    color: white;
     border-radius: 5px;
-
-
+    margin: 5px;
 }
-
 
 .btn:hover {
-    background: #222222;
+    background: #222;
 }
-
 
 .btn:active {
     transform: scale(0.98);
 }
-
 
 .rules-btn {
     position: absolute;
@@ -55,23 +38,34 @@ h1 {
     left: 30px;
 }
 
-
 .rules {
     position: absolute;
     top: 0;
     left: 0;
     background: #333333;
-    color: #ffffff;
+    color: white;
     min-height: 100vh;
     width: 400px;
     padding: 20px;
     line-height: 1.5;
     transform: translateX(-400px);
-    transition: transform  1s ease-in-out (0);
-
+    transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
 }
 
 .rules.show {
-    transform: translateX (0);
+    transform: translateX(0);
+    opacity: 1;
+}
 
+canvas {
+    background: #f0f0f0;
+    display: block;
+    border-radius: 5px;
+}
+
+Play-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
