@@ -162,3 +162,16 @@ h1 {
 #L.visible {
     opacity: 1;
 }
+
+.home{
+
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #1C16AE;
+    text-decoration: none;
+    border-radius: 5px;
+}
