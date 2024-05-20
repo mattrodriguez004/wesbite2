@@ -76,3 +76,60 @@ function showNotification() {
     setTimeout(() => {
       notification.classList.remove('show')
     }, 2000)
+}
+
+// function endGame() {
+//     if (wrongLetters.length == figureParts.length)
+//     {
+//         wrongLettersEl.innerHTML = `
+//         ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+//     }
+// }
+
+// Keydown letter press
+window.addEventListener('keydown', e => {
+
+ if (continueRunning == true) {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+        const letter = e.key
+
+        if (selectedWord.includes(letter)) {
+            if( !correctLetters.includes(letter)) {
+                correctLetters.push(letter)
+
+                displayWord()
+            }   else {
+                showNotification()
+            }
+        }   else {
+            if (!wrongLetters.includes(letter)) {
+                wrongLetters.push(letter)
+
+                updateWrongLettersEl()
+            } else {
+                showNotification()
+            }
+        }
+    }
+ }
+})
+
+
+// Restart game and play again
+playAgainBtn.addEventListener('click', () => {
+    correctLetters.length = 0
+    wrongLetters.length = 0
+    selectedIndex = Math.floor(word.length * Math.random())
+    selectedWord = word[selectedIndex]
+
+    displayWord()
+
+    updateWrongLettersEl()
+
+    popup.style.display = 'none'
+
+    continueRunning = true
+})
+
+
+displayWord()
