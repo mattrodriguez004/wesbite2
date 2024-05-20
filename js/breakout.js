@@ -178,7 +178,7 @@ const colorThemeButton = document.getElementById('color-theme-btn');
 function toggleColorTheme() {
     colorTheme = !colorTheme;
     document.body.style.backgroundColor = colorTheme ? 'Blue' : 'White';
-    canvas.style.background = colorTheme ? 'Black' : 'Gold';
+    canvas.style.background = colorTheme ? 'Black' : 'grey';
     ctx.fillStyle = colorTheme ? '#fff' : '#0095DD';
     draw();
 }
