@@ -10,7 +10,8 @@ body{
     font-family: "Press Start 2P", system-ui;
     height: 100vh;
     overflow: hidden;
-    text-align: center;
+    margin:0;
+
 }
 
 .choose-insect-btn img {
@@ -94,7 +95,7 @@ h1 {
 
 .time {
     position: absolute;
-    top: 40px;
+    top: 20px;
     left: 20px;
 }
 
@@ -103,6 +104,19 @@ h1 {
     position: absolute;
     top: 20px;
     right: 20px;
+}
+.win-message{
+    opacity: 0;
+    line-height: 1.7;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -150%);
 }
 .win-message.visible{
     transition: ease-out 1s;
@@ -129,11 +143,10 @@ h1 {
     transform: translate(-50%, 150%)
 }
 
-
 .message {
     opacity: 0;
     line-height: 1.7;
-    width: 110%;
+    width: 100%;
     background-color: rgba(0,0,0,0.5);
     z-index: 100;
     padding: 20px;
@@ -142,7 +155,11 @@ h1 {
     top: 0;
     left: 50%;
     transform: translate(-50%, -150%);
+    transition: ease-in 1s;
 }
+
+
+
 
 .message.visible {
     opacity: 1;
@@ -171,15 +188,3 @@ h1 {
     transform: translate(-50%, -50%) scale(0);
 }
 
-.home{
-
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #1C16AE;
-    text-decoration: none;
-    border-radius: 5px;
-}
