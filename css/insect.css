@@ -104,6 +104,30 @@ h1 {
     top: 20px;
     right: 20px;
 }
+.win-message.visible{
+    transition: ease-out 1s;
+    opacity: 1;
+    transform: translate(-50%, 150%)
+
+}
+.lose-message{
+    opacity: 0;
+    line-height: 1.7;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -150%);
+}
+.lose-message.visible{
+    transition: ease-out 1s;
+    opacity: 1;
+    transform: translate(-50%, 150%)
+}
 
 
 .message {
@@ -145,22 +169,6 @@ h1 {
 
 .insect.caught {
     transform: translate(-50%, -50%) scale(0);
-}
-
-#W {
-    opacity: 0;
-}
-
-#L {
-    opacity: 0;
-}
-
-#W.visible {
-    opacity: 1;
-}
-
-#L.visible {
-    opacity: 1;
 }
 
 .home{
