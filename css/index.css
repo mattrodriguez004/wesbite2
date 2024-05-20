@@ -3,29 +3,8 @@ body{
     height: 100%;
     margin: 0;
 }
-#start-button{
-    width: 25vw;
-    height: 10vh;
-    color: rgb(0, 0, 0);
-    border: none;
-    text-align: center;
-    font-size: 30px;
-    cursor: pointer;
-    background-color:rgb(125,0,125);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.start-button.invisible{
-transition:ease-out 0.5s ;
-opacity:0;
-}
+
 .ds{
-    opacity: 0%;
     color:rgb(65,0,14);
 }
-.ds.visible{
-    opacity: 100%;
-    transition: ease-in 0.5s;
-}
+
