@@ -3,6 +3,18 @@
     box-sizing: border-box;
 }
 
+.home{
+
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    text-decoration: none;
+    border-radius: 5px;
+}
 body {
     background-color: #34495e;
     color: #ffffff;
